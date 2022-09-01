@@ -12,10 +12,10 @@ class MyLog(BaseModel):
 
 
 params_service = {"query": '{container_name="angry_greider"}'}
-
 url = os.getenv("LOKI_URL")
 response = requests.get(url=url, params=params_service)
 data = response.json()["data"]["result"]
+print("==== Get all rows ====")
 # params_service
 for row in data:
     dt = row["values"]
@@ -23,7 +23,9 @@ for row in data:
         nest = item[1]
         j_data = json.loads(nest)
         print(MyLog(**j_data))
-
+print("==================")
+print("\n")
+print("==== Get all rows based by job_id ====")
 # params_logs
 params_logs = {
     "query": '{container_name="angry_greider"} |= `` | json | job_id = `HEJhej`'
@@ -33,3 +35,4 @@ data = response.json()["data"]["result"]
 for row in data:
     dt = row["stream"]
     print(MyLog(**dt))
+print("==================")
