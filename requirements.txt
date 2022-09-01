@@ -1,0 +1,6 @@
+structlog
+urllib3
+python-json-logger
+python-dateutil
+requests
+pydantic
